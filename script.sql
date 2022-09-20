@@ -38,7 +38,38 @@ END;
 $$
 
 ------------------------------------------
-
+--calcular potenciais raizes de uma equação de segundo grau
+--dados seus coeficientes
+DO $$
+DECLARE
+	a INT := fn_valor_aleatorio_entre(0, 20);
+	b INT := fn_valor_aleatorio_entre(0, 20);
+	c INT := fn_valor_aleatorio_entre(0, 20);
+	delta NUMERIC (10, 2);
+	raizUm NUMERIC (10, 2);
+	raizDois NUMERIC (10, 2);
+BEGIN
+	RAISE NOTICE '%x% + %x + % = 0', a, U&'\00B2', b, c;
+	IF a = 0 THEN
+		RAISE NOTICE 'Não é uma equação do segundo grau';
+	ELSE
+		--delta := b ^ 2 - (4 * a * c);
+		delta := b ^ 2 - 4ac;
+		RAISE NOTICE 'Delta: %', delta;
+		IF delta < 0 THEN
+			RAISE NOTICE 'Nenhuma raiz';
+		-- pode ser ELSEIF ou ELSIF
+		ELSIF delta = 0 THEN
+			raizUm := (-b + |/delta) / 2a;
+			RAISE NOTICE 'Apenas uma raiz: %', raizUm;
+		ELSE
+			raizUm := (-b + |/delta) / 2a;
+			raizDois := (-b - |/delta) / 2a;
+			RAISE NOTICE 'Duas raizes: % e %', raizUm, raizDois;
+		END IF;
+	END IF;
+END;
+$$
 
 
 
