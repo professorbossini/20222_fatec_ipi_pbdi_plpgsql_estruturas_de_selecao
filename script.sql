@@ -70,8 +70,78 @@ BEGIN
 	END IF;
 END;
 $$
-
-
+----------------------------------
+DO $$
+DECLARE
+	valor INT;
+	mensagem VARCHAR(200);
+BEGIN
+	valor := fn_valor_aleatorio_entre (1, 12);
+	RAISE NOTICE 'valor: %', valor;
+	CASE valor
+		WHEN 1 THEN
+			mensagem := 'ímpar';
+		WHEN 3 THEN
+			mensagem := 'ímpar';
+		WHEN 5 THEN
+			mensagem := 'ímpar';
+		WHEN 7 THEN
+			mensagem := 'ímpar';
+		WHEN 9 THEN
+			mensagem := 'ímpar';
+		WHEN 2 THEN
+			mensagem := 'par';
+		WHEN 4 THEN
+			mensagem := 'par';
+		WHEN 6 THEN
+			mensagem := 'par';
+		WHEN 8 THEN
+			mensagem := 'par';
+		WHEN 10 THEN
+			mensagem := 'par';
+		--ELSE
+			--mensagem := 'valor fora do intervalo';	
+	END CASE;
+		RAISE NOTICE '%', mensagem;
+END;
+$$
+-------------------------------------------
+DO $$
+DECLARE
+	valor INT := fn_valor_aleatorio_entre(1, 12);
+	mensagem VARCHAR(200);
+BEGIN
+	RAISE NOTICE 'Valor: %', valor;
+	CASE valor
+		WHEN 1, 3, 5, 7, 9 THEN
+			mensagem := 'ímpar';
+		WHEN 2, 4, 6, 8, 10 THEN
+			mensagem := 'par';
+		ELSE
+			mensagem := 'Fora do intervalo';
+	END CASE;
+		RAISE NOTICE '%', mensagem;
+END;
+$$
+-----------------------------------------
+DO $$
+DECLARE
+	valor INT := fn_valor_aleatorio_entre(1, 12);
+BEGIN
+	RAISE NOTICE 'Valor: %', valor;
+	CASE
+		WHEN valor BETWEEN 1 AND 10 THEN
+			CASE
+				WHEN valor % 2 = 0 THEN
+					RAISE NOTICE '% é par', valor;
+				ELSE
+					RAISE NOTICE '% é ímpar', valor;
+			END CASE;
+		ELSE
+			RAISE NOTICE 'Valor fora do intervalo';
+	END CASE;
+END;
+$$
 
 
 
